@@ -3,8 +3,12 @@ package com.deliverytech.delivery_api.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.deliverytech.delivery_api.enums.StatusPedido;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +32,8 @@ public class Pedido {
     @Column(name = "data_pedido")
     private LocalDateTime dataPedido;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
@@ -40,4 +45,6 @@ public class Pedido {
 
     @Column(name = "restaurante_id")
     private Long restauranteId;
+
+
 }
