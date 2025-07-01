@@ -2,6 +2,7 @@ package com.deliverytech.delivery_api;
 
 import com.deliverytech.delivery_api.entity.*;
 import com.deliverytech.delivery_api.enums.StatusPedido;
+import com.deliverytech.delivery_api.projection.ClienteResumoProjection;
 import com.deliverytech.delivery_api.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -109,8 +110,8 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("findByStatus(A_CAMINHO): " + pedidoRepository.findByStatus(StatusPedido.SAIU_PARA_ENTREGA));
         System.out.println("findTop10ByOrderByDataPedidoDesc(): " + pedidoRepository.findTop10ByOrderByDataPedidoDesc());
         System.out.println("findByDataPedidoBetween(ontem, amanhã): " + pedidoRepository.findByDataPedidoBetween(LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1)));
-
-        // --- ADICIONE ESTE NOVO BLOCO NO FINAL DO MÉTODO ---
+        
+        // Testes de consultas com @Query
         System.out.println("\n--- 🧪 3.1 Testando consultas com @Query ---");
 
         System.out.println("\n[PEDIDO REPOSITORY - @Query]");
@@ -129,6 +130,14 @@ public class DataLoader implements CommandLineRunner {
                         StatusPedido.ENTREGUE
                 )
         );
+
+        //projection
+        System.out.println("\n--- 🧩 3.3 Testando consultas com Projeções ---");
+        System.out.println("\n[CLIENTE REPOSITORY - Projections]");
+        
+        List<ClienteResumoProjection> resumoClientes = clienteRepository.findResumoDeClientesAtivos();
+
+
     }
     
 }
