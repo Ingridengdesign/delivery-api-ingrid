@@ -109,5 +109,26 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("findByStatus(A_CAMINHO): " + pedidoRepository.findByStatus(StatusPedido.SAIU_PARA_ENTREGA));
         System.out.println("findTop10ByOrderByDataPedidoDesc(): " + pedidoRepository.findTop10ByOrderByDataPedidoDesc());
         System.out.println("findByDataPedidoBetween(ontem, amanhã): " + pedidoRepository.findByDataPedidoBetween(LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1)));
+
+        // --- ADICIONE ESTE NOVO BLOCO NO FINAL DO MÉTODO ---
+        System.out.println("\n--- 🧪 3.1 Testando consultas com @Query ---");
+
+        System.out.println("\n[PEDIDO REPOSITORY - @Query]");
+
+        // Teste 1: Total de vendas por restaurante
+        System.out.println("findTotalVendasPorRestaurante(): " + pedidoRepository.findTotalVendasPorRestaurante());
+
+        // Teste 2: Pedidos com valor acima de 100
+        System.out.println("findPedidosComValorAcimaDe(100.00): " + pedidoRepository.findPedidosComValorAcimaDe(new BigDecimal("100.00")));
+
+        // Teste 3: Relatório de pedidos entregues hoje
+        System.out.println("findRelatorioPorPeriodoEStatus(hoje, ENTREGUE): " +
+                pedidoRepository.findRelatorioPorPeriodoEStatus(
+                        LocalDateTime.now().withHour(0).withMinute(0), // Início do dia de hoje
+                        LocalDateTime.now().withHour(23).withMinute(59), // Fim do dia de hoje
+                        StatusPedido.ENTREGUE
+                )
+        );
     }
+    
 }
