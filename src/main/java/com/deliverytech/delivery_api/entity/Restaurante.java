@@ -1,12 +1,9 @@
 package com.deliverytech.delivery_api.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "restaurantes")
 public class Restaurante {
 
     @Id
@@ -35,4 +33,8 @@ public class Restaurante {
     private BigDecimal avaliacao;
 
     private Boolean ativo;
+
+    public void inativar() {
+        this.ativo = false;
+    }
 }
